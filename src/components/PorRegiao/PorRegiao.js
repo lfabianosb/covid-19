@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
+import "chartjs-plugin-labels";
 import style from "./style.module.css";
 
 const url =
@@ -55,6 +56,16 @@ function PorRegiao() {
         },
 
         options: {
+          plugins: {
+            labels: {
+              // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
+              render: "percentage",
+              precision: 2,
+              showZero: true,
+              fontSize: 13,
+              fontStyle: "bold",
+            },
+          },
           animation: {
             duration: 2000, // general animation time
           },
@@ -63,6 +74,7 @@ function PorRegiao() {
             display: true,
             text: "CASOS POR REGIÃO",
           },
+          tooltips: { enabled: false },
         },
       });
     }

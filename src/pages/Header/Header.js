@@ -11,16 +11,22 @@ const Header = () => {
   return (
     <Router>
       <header className={style.header}>
+        <img
+          className={style.logo}
+          src="images/logo-app.png"
+          width="300"
+          alt="Logo"
+        />
         <nav>
           <ul className={style.nav_links}>
             <li>
               <Link to="/">Geral</Link>
             </li>
             <li>
-              <Link to="/por-regiao">Casos por região</Link>
+              <Link to="/por-regiao">Por região</Link>
             </li>
             <li>
-              <Link to="/novos-por-dia">Casos novos por dia</Link>
+              <Link to="/novos-por-dia">Novos por dia</Link>
             </li>
             <li>
               <Link to="/acumulado">Acumulado</Link>
