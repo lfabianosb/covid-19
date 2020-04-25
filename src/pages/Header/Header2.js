@@ -14,11 +14,11 @@ const Header2 = () => {
           <Navbar.Brand href="#home">CONORAVÍRUS // BRASIL</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="#pricing">Geral</Nav.Link>
-              <Nav.Link href="/por-regiao">Por Região</Nav.Link>
-              <Nav.Link href="/novos-por-dia">Novos por dia</Nav.Link>
-              <Nav.Link href="/acumulado">Acumulado</Nav.Link>
+            <Nav className="ml-auto">
+              <Nav.Link href="/">GERAL</Nav.Link>
+              <Nav.Link href="/por-regiao">POR REGIÃO</Nav.Link>
+              <Nav.Link href="/novos-por-dia">NOVOS POR DIA</Nav.Link>
+              <Nav.Link href="/acumulado">ACUMULADO</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
