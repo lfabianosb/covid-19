@@ -1,55 +1,45 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Acumulado } from "../../components/Acumulado";
 import { Geral } from "../../components/Geral";
 import { PorRegiao } from "../../components/PorRegiao";
 import { NovosPorDia } from "../../components/NovosPorDia";
 
-import style from "./style.module.css";
-
-const Header = () => {
+const Header2 = () => {
   return (
-    <Router>
-      <header className={style.header}>
-        <img
-          className={style.logo}
-          src="images/logo-app.png"
-          width="300"
-          alt="Logo"
-        />
-        <nav>
-          <ul className={style.nav_links}>
-            <li>
-              <Link to="/">Geral</Link>
-            </li>
-            <li>
-              <Link to="/por-regiao">Por região</Link>
-            </li>
-            <li>
-              <Link to="/novos-por-dia">Novos por dia</Link>
-            </li>
-            <li>
-              <Link to="/acumulado">Acumulado</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <Switch>
-        <Route exact path="/">
-          <Geral />
-        </Route>
-        <Route path="/acumulado">
-          <Acumulado />
-        </Route>
-        <Route path="/por-regiao">
-          <PorRegiao />
-        </Route>
-        <Route path="/novos-por-dia">
-          <NovosPorDia />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Navbar.Brand href="#home">CONORAVÍRUS // BRASIL</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link href="/">GERAL</Nav.Link>
+              <Nav.Link href="/por-regiao">POR REGIÃO</Nav.Link>
+              <Nav.Link href="/novos-por-dia">NOVOS POR DIA</Nav.Link>
+              <Nav.Link href="/acumulado">ACUMULADO</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Switch>
+          <Route exact path="/">
+            <Geral />
+          </Route>
+          <Route path="/acumulado">
+            <Acumulado />
+          </Route>
+          <Route path="/por-regiao">
+            <PorRegiao />
+          </Route>
+          <Route path="/novos-por-dia">
+            <NovosPorDia />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 };
 
-export default Header;
+export default Header2;
