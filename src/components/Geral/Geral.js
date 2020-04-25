@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import style from "./style.module.css";
 
 const url =
   "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
@@ -31,10 +32,10 @@ const Geral = () => {
   }
 
   return (
-    <div>
-      <h3>Total: {geral.total}</h3>
-      <h3>Óbitos: {geral.obitos}</h3>
-      <h3>Letalidade: {geral.letalidade}</h3>
+    <div className={style.container}>
+      <h1>Total: {geral.total}</h1>
+      <h1>Óbitos: {geral.obitos}</h1>
+      <h1>Letalidade: {geral.letalidade}</h1>
     </div>
   );
 };

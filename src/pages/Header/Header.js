@@ -2,21 +2,19 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Acumulado } from "../../components/Acumulado";
 import { Geral } from "../../components/Geral";
-import { Home } from "../../pages/Home";
+import { PorRegiao } from "../../components/PorRegiao";
+import { NovosPorDia } from "../../components/NovosPorDia";
 
 import style from "./style.module.css";
 
 const Header = () => {
   return (
     <Router>
-      <header class={style.header}>
+      <header className={style.header}>
         <nav>
-          <ul class={style.nav_links}>
+          <ul className={style.nav_links}>
             <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/geral">Geral</Link>
+              <Link to="/">Geral</Link>
             </li>
             <li>
               <Link to="/por-regiao">Casos por região</Link>
@@ -32,13 +30,16 @@ const Header = () => {
       </header>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Geral />
         </Route>
         <Route path="/acumulado">
           <Acumulado />
         </Route>
-        <Route path="/geral">
-          <Geral />
+        <Route path="/por-regiao">
+          <PorRegiao />
+        </Route>
+        <Route path="/novos-por-dia">
+          <NovosPorDia />
         </Route>
       </Switch>
     </Router>

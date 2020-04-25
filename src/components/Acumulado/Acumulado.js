@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
+import style from "./style.module.css";
 
 const url =
   "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalAcumulo?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
@@ -57,7 +58,7 @@ function Acumulado() {
           responsive: true,
           title: {
             display: true,
-            text: "COVID-19",
+            text: "ACUMULADO",
           },
         },
       });
@@ -65,8 +66,8 @@ function Acumulado() {
   }, [chartContainer, datas, casos, mortes]);
 
   return (
-    <div>
-      <canvas id="myChart" ref={chartContainer} />
+    <div className={style.container}>
+      <canvas id="myChartAcumulado" ref={chartContainer} />
     </div>
   );
 }
