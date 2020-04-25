@@ -9,7 +9,7 @@
 li,
 a {
   font-family: Arial;
-  font-size: 22px;
+  font-size: 20px;
   color: black;
   text-decoration: none;
   background-color: #ccc;
@@ -33,7 +33,6 @@ a {
 }
 
 .nav_links li a:hover {
-  color: #0088a9;
+  color: #0315b9;
   cursor: pointer;
-  background-color: #999;
 }
