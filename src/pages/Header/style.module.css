@@ -25,7 +25,7 @@ a {
 
 .nav_links li {
   display: inline-block;
-  padding: 0px 40px;
+  padding: 0px 50px;
 }
 
 .nav_links li a {
@@ -35,4 +35,5 @@ a {
 .nav_links li a:hover {
   color: #0088a9;
   cursor: pointer;
+  background-color: #999;
 }
