@@ -62,7 +62,7 @@ function PorRegiao() {
               render: "percentage",
               precision: 2,
               showZero: true,
-              fontSize: 13,
+              fontSize: 12,
               fontStyle: "bold",
             },
           },
