@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import style from "./style.module.css";
 
 const url =
@@ -28,14 +29,26 @@ const Geral = () => {
   }, []);
 
   if (!geral) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className={style.container}>
+        <div className={style.item}>
+          <Spinner animation="grow" />
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className={style.container}>
-      <h1>Total: {geral.total}</h1>
-      <h1>Óbitos: {geral.obitos}</h1>
-      <h1>Letalidade: {geral.letalidade}</h1>
+      <div className={style.item}>
+        <div className={style.number}>{geral.total}</div> Casos Confirmados
+      </div>
+      <div className={style.item}>
+        <div className={style.number}>{geral.obitos}</div> Óbitos
+      </div>
+      <div className={style.item}>
+        <div className={style.number}>{geral.letalidade}</div> Letalidade
+      </div>
     </div>
   );
 };

@@ -1,11 +1,38 @@
 .container {
-  padding: 20px 50px;
-  width: 75%;
+  padding: 20px;
+  width: 80%;
   margin: 0 auto;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
 @media only screen and (max-width: 990px) {
   .container {
     padding: 20px 5px;
-    width: 99%;
+    width: 90%;
   }
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+  .item {
+    text-align: center;
+  }
+}
+
+.item {
+  font-size: 18px;
+  font-family: Arial;
+  margin: 10px;
+}
+
+.number {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
 }
