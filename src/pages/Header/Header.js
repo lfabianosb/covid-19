@@ -1,12 +1,9 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Acumulado } from "../../components/Acumulado";
-import { Geral } from "../../components/Geral";
-import { PorRegiao } from "../../components/PorRegiao";
-import { NovosPorDia } from "../../components/NovosPorDia";
+import { BrowserRouter as Router } from "react-router-dom";
+import style from "./style.module.css";
 
-const Header2 = () => {
+const Header = () => {
   return (
     <>
       <Router>
@@ -15,31 +12,27 @@ const Header2 = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link href="/">GERAL</Nav.Link>
-              <Nav.Link href="/por-regiao">POR REGIÃO</Nav.Link>
-              <Nav.Link href="/novos-por-dia">NOVOS POR DIA</Nav.Link>
-              <Nav.Link href="/acumulado">ACUMULADO</Nav.Link>
+              <Nav.Link className={style.navLink} href="/">
+                GERAL
+              </Nav.Link>
+              <Nav.Link className={style.navLink} href="/por-regiao">
+                POR REGIÃO
+              </Nav.Link>
+              <Nav.Link className={style.navLink} href="/por-estado">
+                POR ESTADO
+              </Nav.Link>
+              <Nav.Link className={style.navLink} href="/novos-por-dia">
+                NOVOS POR DIA
+              </Nav.Link>
+              <Nav.Link className={style.navLink} href="/acumulado">
+                ACUMULADO
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-
-        <Switch>
-          <Route exact path="/">
-            <Geral />
-          </Route>
-          <Route path="/acumulado">
-            <Acumulado />
-          </Route>
-          <Route path="/por-regiao">
-            <PorRegiao />
-          </Route>
-          <Route path="/novos-por-dia">
-            <NovosPorDia />
-          </Route>
-        </Switch>
       </Router>
     </>
   );
 };
 
-export default Header2;
+export default Header;
