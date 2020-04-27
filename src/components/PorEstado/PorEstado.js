@@ -49,6 +49,7 @@ function PorEstado() {
         },
 
         options: {
+          maintainAspectRatio: false,
           animation: {
             duration: 2000, // general animation time
           },
