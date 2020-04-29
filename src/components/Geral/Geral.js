@@ -13,9 +13,6 @@ const Geral = () => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-
-        console.log("data", data.results);
-
         setGeral({
           total: data.results[0].total_confirmado,
           obitos: data.results[0].total_obitos,
