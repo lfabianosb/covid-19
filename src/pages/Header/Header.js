@@ -8,7 +8,7 @@ const Header = () => {
     <>
       <Router>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-          <Navbar.Brand href="#home">CONORAVÍRUS // BRASIL</Navbar.Brand>
+          <Navbar.Brand href="/">CONORAVÍRUS // BRASIL</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ml-auto">
