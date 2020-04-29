@@ -77,7 +77,7 @@ function PorEstado() {
 
   return (
     <div className={style.container}>
-      <canvas id="myChartPorEstado" ref={chartContainer} />
+      <canvas id="myChart" ref={chartContainer} />
     </div>
   );
 }

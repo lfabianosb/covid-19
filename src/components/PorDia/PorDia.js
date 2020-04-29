@@ -87,7 +87,7 @@ function PorDia() {
 
   return (
     <div className={style.container}>
-      <canvas id="myChartPorDia" ref={chartContainer} />
+      <canvas id="myChart" ref={chartContainer} />
     </div>
   );
 }

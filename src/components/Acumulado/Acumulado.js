@@ -67,7 +67,7 @@ function Acumulado() {
 
   return (
     <div className={style.container}>
-      <canvas id="myChartAcumulado" ref={chartContainer} />
+      <canvas id="myChart" ref={chartContainer} />
     </div>
   );
 }

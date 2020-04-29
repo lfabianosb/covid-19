@@ -82,7 +82,7 @@ function PorRegiao() {
 
   return (
     <div className={style.container}>
-      <canvas id="myChartRegiao" ref={chartContainer} />
+      <canvas id="myChart" ref={chartContainer} />
     </div>
   );
 }
