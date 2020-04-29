@@ -21,8 +21,8 @@ const Header = () => {
               <Nav.Link className={style.navLink} href="/por-estado">
                 POR ESTADO
               </Nav.Link>
-              <Nav.Link className={style.navLink} href="/novos-por-dia">
-                NOVOS POR DIA
+              <Nav.Link className={style.navLink} href="/por-dia">
+                POR DIA
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/acumulado">
                 ACUMULADO
