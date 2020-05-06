@@ -5,6 +5,13 @@ import style from "./style.module.css";
 const url =
   "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
 
+// Formato de entrada: HH:mm dd/MM/yyyy
+// Formato de saída: dd/MM/yyyy às HH:mm
+const dataHora = (data) => {
+  const dateTime = data.split(" ");
+  return dateTime[1] + " às " + dateTime[0];
+};
+
 const Geral = () => {
   const [geral, setGeral] = useState(null);
 
@@ -17,6 +24,9 @@ const Geral = () => {
           total: data.results[0].total_confirmado,
           obitos: data.results[0].total_obitos,
           letalidade: data.results[0].total_letalidade,
+          dt_atualizacao: data.results[0].dt_atualizacao
+            ? dataHora(data.results[0].dt_atualizacao)
+            : "",
         });
       } catch (error) {
         console.error("error", error);
@@ -45,6 +55,9 @@ const Geral = () => {
       </div>
       <div className={style.item}>
         <div className={style.number}>{geral.letalidade}</div> Letalidade
+      </div>
+      <div className={style.atualizacao}>
+        Atualizado em {geral.dt_atualizacao}
       </div>
     </div>
   );
