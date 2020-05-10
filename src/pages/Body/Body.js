@@ -6,6 +6,7 @@ import { PorRegiao } from "../../components/PorRegiao";
 import { NovosPorDia } from "../../components/NovosPorDia";
 import { PorEstado } from "../../components/PorEstado";
 import { PorDia } from "../../components/PorDia";
+import { MortePorMilhao } from "../../components/MortePorMilhao";
 
 const Body = () => {
   return (
@@ -28,6 +29,9 @@ const Body = () => {
         </Route>
         <Route path="/por-dia">
           <PorDia />
+        </Route>
+        <Route path="/morte-habitantes">
+          <MortePorMilhao />
         </Route>
       </Switch>
     </Router>

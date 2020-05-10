@@ -24,6 +24,9 @@ const Header = () => {
               <Nav.Link className={style.navLink} href="/por-dia">
                 POR DIA
               </Nav.Link>
+              <Nav.Link className={style.navLink} href="/morte-habitantes">
+                POR HABITANTES
+              </Nav.Link>
               <Nav.Link className={style.navLink} href="/acumulado">
                 ACUMULADO
               </Nav.Link>
