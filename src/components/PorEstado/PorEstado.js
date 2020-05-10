@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
+import UFs from "../../shared/UFs";
 import style from "./style.module.css";
 
 const url =
@@ -33,6 +34,14 @@ function PorEstado() {
 
   useEffect(() => {
     if (data) {
+      data.forEach((item) => {
+        UFs.forEach((estado) => {
+          if (estado.nome === item.estado) {
+            item.sigla = estado.sigla;
+          }
+        });
+      });
+
       // Sort desc
       data.sort((a, b) => {
         if (a.confirmado < b.confirmado) {
@@ -44,7 +53,7 @@ function PorEstado() {
         return 0;
       });
 
-      setLabels(data.map(({ estado }) => estado));
+      setLabels(data.map(({ sigla }) => sigla));
       setCasos(data.map(({ confirmado }) => confirmado));
       setMortes(data.map(({ obito }) => obito));
     }

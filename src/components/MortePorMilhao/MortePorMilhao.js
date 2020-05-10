@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
 import { Spinner } from "react-bootstrap";
+import UFs from "../../shared/UFs";
 import style from "./style.module.css";
 
 const urlCasos =
   "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMapa?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
 
-const urlEstados =
-  "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
-
 function MortePorMilhao() {
   const [labels, setLabels] = useState(null);
   const [mortes, setMortes] = useState(null);
-  const [estados, setEstados] = useState(null);
   const [data, setData] = useState(null);
   const chartContainer = useRef(null);
 
@@ -32,24 +29,13 @@ function MortePorMilhao() {
       }
     };
 
-    const getEstados = async () => {
-      try {
-        const response = await fetch(urlEstados);
-        const data = await response.json();
-        setEstados(data.map(({ sigla, nome }) => ({ sigla, nome })));
-      } catch (error) {
-        console.error("error", error);
-      }
-    };
-
     getMortes();
-    getEstados();
   }, []);
 
   useEffect(() => {
-    if (mortes && estados) {
+    if (mortes) {
       mortes.forEach((morte) => {
-        estados.forEach((estado) => {
+        UFs.forEach((estado) => {
           if (estado.nome === morte.nome) {
             morte.sigla = estado.sigla;
           }
@@ -67,10 +53,10 @@ function MortePorMilhao() {
         return 0;
       });
 
-      setLabels(mortes.map((morte) => morte.sigla));
-      setData(mortes.map((morte) => morte.letalidade));
+      setLabels(mortes.map(({ sigla }) => sigla));
+      setData(mortes.map(({ letalidade }) => letalidade));
     }
-  }, [mortes, estados]);
+  }, [mortes]);
 
   useEffect(() => {
     if (chartContainer && chartContainer.current && labels && data) {
