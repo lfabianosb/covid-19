@@ -9,6 +9,7 @@ function PorEstado() {
   const [labels, setLabels] = useState(null);
   const [casos, setCasos] = useState(null);
   const [mortes, setMortes] = useState(null);
+  const [data, setData] = useState(null);
   const chartContainer = useRef(null);
 
   useEffect(() => {
@@ -16,15 +17,38 @@ function PorEstado() {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        setLabels(data.results.map((result) => result.nome));
-        setCasos(data.results.map((result) => result.qtd_confirmado));
-        setMortes(data.results.map((result) => result.qtd_obito));
+        setData(
+          data.results.map(({ nome, qtd_confirmado, qtd_obito }) => ({
+            estado: nome,
+            confirmado: qtd_confirmado,
+            obito: qtd_obito,
+          }))
+        );
       } catch (error) {
         console.error("error", error);
       }
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      // Sort desc
+      data.sort((a, b) => {
+        if (a.confirmado < b.confirmado) {
+          return 1;
+        }
+        if (a.confirmado > b.confirmado) {
+          return -1;
+        }
+        return 0;
+      });
+
+      setLabels(data.map(({ estado }) => estado));
+      setCasos(data.map(({ confirmado }) => confirmado));
+      setMortes(data.map(({ obito }) => obito));
+    }
+  }, [data]);
 
   useEffect(() => {
     if (chartContainer && chartContainer.current && labels && casos && mortes) {
