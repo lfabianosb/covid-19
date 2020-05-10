@@ -16,16 +16,16 @@ const Header = () => {
                 GERAL
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/por-regiao">
-                POR REGIÃO
+                REGIÃO
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/por-estado">
-                POR ESTADO
+                ESTADO
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/por-dia">
-                POR DIA
+                DIA
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/morte-habitantes">
-                POR HABITANTES
+                HABITANTES
               </Nav.Link>
               <Nav.Link className={style.navLink} href="/acumulado">
                 ACUMULADO
