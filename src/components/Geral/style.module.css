@@ -1,12 +1,12 @@
 .container {
-  padding: 10px 50px;
-  width: 75%;
+  width: 80vw;
+  height: 70vh;
   margin: 0 auto;
-  height: 600px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  min-height: 220px;
 }
 
 .item {
@@ -21,7 +21,7 @@
   flex: 1 1 100%;
   text-align: left;
   font-size: 12px;
-  margin-left: 5px;
+  margin: 0px 10px;
   font-family: Arial;
 }
 
@@ -33,14 +33,14 @@
 
 @media only screen and (max-width: 990px) {
   .container {
-    padding: 10px 5px;
-    width: 90%;
+    width: 90vw;
   }
 }
 
 @media only screen and (max-width: 600px) {
   .container {
     flex-direction: column;
+    min-height: 330px;
   }
   .item {
     flex: 1;
@@ -48,6 +48,6 @@
   }
   .atualizacao {
     flex: 1;
-    margin-top: 40px;
+    margin-top: 30px;
   }
 }

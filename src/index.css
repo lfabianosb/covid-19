@@ -1,7 +1,42 @@
 *,
-body,
-#root {
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  flex: 0 0 auto;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+footer {
+  text-align: center;
+  flex: 0 0 auto;
+  background-color: #333;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+footer div {
+  padding: 2px 0px;
+}
+
+footer a {
+  color: white;
+}
+
+footer a:hover {
+  text-decoration: none;
 }
