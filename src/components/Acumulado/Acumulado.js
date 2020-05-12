@@ -8,7 +8,8 @@ const url =
 function Acumulado() {
   const [casos, setCasos] = useState(null);
   const [mortes, setMortes] = useState(null);
-  const [datas, setDatas] = useState(null);
+  const [labels, setLabels] = useState(null);
+  const [data, setData] = useState(null);
   const chartContainer = useRef(null);
 
   useEffect(() => {
@@ -16,9 +17,14 @@ function Acumulado() {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        setDatas(data.results.map((result) => result.label));
-        setCasos(data.results.map((result) => result.qtd_confirmado));
-        setMortes(data.results.map((result) => result.qtd_obito));
+        setData(
+          data.results.map(({ label, qtd_confirmado, qtd_obito }) => ({
+            label,
+            data: "2020-" + label.substring(3, 5) + "-" + label.substring(0, 2),
+            confirmados: qtd_confirmado,
+            obitos: qtd_obito,
+          }))
+        );
       } catch (error) {
         console.error("error", error);
       }
@@ -27,12 +33,29 @@ function Acumulado() {
   }, []);
 
   useEffect(() => {
-    if (chartContainer && chartContainer.current && datas && casos && mortes) {
+    if (data) {
+      // Sort asc
+      data.sort((a, b) => {
+        if (Date.parse(a.data) > Date.parse(b.data)) {
+          return 1;
+        }
+        if (Date.parse(a.data) < Date.parse(b.data)) {
+          return -1;
+        }
+        return 0;
+      });
+      setLabels(data.map(({ label }) => label));
+      setCasos(data.map(({ confirmados }) => confirmados));
+      setMortes(data.map(({ obitos }) => obitos));
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (chartContainer && chartContainer.current && labels && casos && mortes) {
       new Chartjs(chartContainer.current, {
         type: "line",
         data: {
-          //Bring in data
-          labels: datas,
+          labels: labels,
           datasets: [
             {
               label: "Casos",
@@ -53,7 +76,7 @@ function Acumulado() {
 
         options: {
           animation: {
-            duration: 2000, // general animation time
+            duration: 2000,
           },
           responsive: true,
           title: {
@@ -63,7 +86,7 @@ function Acumulado() {
         },
       });
     }
-  }, [chartContainer, datas, casos, mortes]);
+  }, [chartContainer, labels, casos, mortes]);
 
   return (
     <div className={style.container}>
