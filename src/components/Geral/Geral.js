@@ -3,7 +3,7 @@ import { Spinner } from "react-bootstrap";
 import style from "./style.module.css";
 
 const url =
-  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeral?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
+  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalGeralApi";
 
 const Geral = () => {
   const [geral, setGeral] = useState(null);
@@ -11,13 +11,16 @@ const Geral = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          referrer: "https://covid.saude.gov.br/",
+        });
         const data = await response.json();
         setGeral({
-          total: data.results[0].total_confirmado,
-          obitos: data.results[0].total_obitos,
-          letalidade: data.results[0].total_letalidade,
-          dt_atualizacao: data.results[0].dt_atualizacao,
+          confirmados: data.confirmados.total,
+          recuperados: data.confirmados.recuperados,
+          obitos: data.obitos.total,
+          letalidade: data.obitos.letalidade,
+          dt_atualizacao: new Date(data.dt_updated).toLocaleString(),
         });
       } catch (error) {
         console.error("error", error);
@@ -39,7 +42,11 @@ const Geral = () => {
   return (
     <div className={style.container}>
       <div className={style.item}>
-        <div className={style.number}>{geral.total}</div> Casos Confirmados
+        <div className={style.number}>{geral.confirmados}</div> Casos
+        Confirmados
+      </div>
+      <div className={style.item}>
+        <div className={style.number}>{geral.recuperados}</div> Recuperados
       </div>
       <div className={style.item}>
         <div className={style.number}>{geral.obitos}</div> Óbitos

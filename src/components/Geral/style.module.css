@@ -1,32 +1,30 @@
 .container {
-  width: 80vw;
+  width: 90vw;
   height: 70vh;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  min-height: 220px;
 }
 
 .item {
-  flex: 1 1 30%; /*grow | shrink | basis */
+  flex: 1;
   font-size: 18px;
   font-family: Arial;
   margin: 5px;
-  padding-left: 10px;
+  text-align: center;
 }
 
 .atualizacao {
   flex: 1 1 100%;
-  text-align: left;
+  text-align: center;
   font-size: 12px;
-  margin: 0px 10px;
   font-family: Arial;
 }
 
 .number {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
   color: #333;
 }
