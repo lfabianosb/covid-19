@@ -3,52 +3,30 @@ import Chartjs from "chart.js";
 import style from "./style.module.css";
 
 const url =
-  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalAcumulo?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
+  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalCasos";
 
 function Acumulado() {
   const [casos, setCasos] = useState(null);
   const [mortes, setMortes] = useState(null);
   const [labels, setLabels] = useState(null);
-  const [data, setData] = useState(null);
   const chartContainer = useRef(null);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          referrer: "https://covid.saude.gov.br/",
+        });
         const data = await response.json();
-        setData(
-          data.results.map(({ label, qtd_confirmado, qtd_obito }) => ({
-            label,
-            data: "2020-" + label.substring(3, 5) + "-" + label.substring(0, 2),
-            confirmados: qtd_confirmado,
-            obitos: qtd_obito,
-          }))
-        );
+        setLabels(data.dias.map(({ _id }) => _id));
+        setCasos(data.dias.map(({ casosAcumulado }) => casosAcumulado));
+        setMortes(data.dias.map(({ obitosAcumulado }) => obitosAcumulado));
       } catch (error) {
         console.error("error", error);
       }
     };
     getData();
   }, []);
-
-  useEffect(() => {
-    if (data) {
-      // Sort asc
-      data.sort((a, b) => {
-        if (Date.parse(a.data) > Date.parse(b.data)) {
-          return 1;
-        }
-        if (Date.parse(a.data) < Date.parse(b.data)) {
-          return -1;
-        }
-        return 0;
-      });
-      setLabels(data.map(({ label }) => label));
-      setCasos(data.map(({ confirmados }) => confirmados));
-      setMortes(data.map(({ obitos }) => obitos));
-    }
-  }, [data]);
 
   useEffect(() => {
     if (chartContainer && chartContainer.current && labels && casos && mortes) {

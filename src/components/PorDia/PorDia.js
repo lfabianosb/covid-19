@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
+import { Spinner } from "react-bootstrap";
 import style from "./style.module.css";
 
 const url =
-  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalAcumulo?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
+  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalCasos";
 
 function PorDia() {
   const [casos, setCasos] = useState(null);
@@ -14,31 +15,13 @@ function PorDia() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          referrer: "https://covid.saude.gov.br/",
+        });
         const data = await response.json();
-        setLabels(data.results.map((result) => result.label).slice(1));
-        setCasos(
-          data.results
-            .map((result, index) => {
-              if (index > 0) {
-                return (
-                  result.qtd_confirmado - data.results[index - 1].qtd_confirmado
-                );
-              }
-              return null;
-            })
-            .slice(1)
-        );
-        setMortes(
-          data.results
-            .map((result, index) => {
-              if (index > 0) {
-                return result.qtd_obito - data.results[index - 1].qtd_obito;
-              }
-              return null;
-            })
-            .slice(1)
-        );
+        setLabels(data.dias.map(({ _id }) => _id));
+        setCasos(data.dias.map(({ casosNovos }) => casosNovos));
+        setMortes(data.dias.map(({ obitosNovos }) => obitosNovos));
       } catch (error) {
         console.error("error", error);
       }
@@ -84,6 +67,18 @@ function PorDia() {
       });
     }
   }, [chartContainer, labels, casos, mortes]);
+
+  if (!labels || !casos || !mortes) {
+    return (
+      <div className={style.container}>
+        <div className={style.item}>
+          <Spinner animation="grow" />
+          <br />
+          <span>Consultando dados...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={style.container}>

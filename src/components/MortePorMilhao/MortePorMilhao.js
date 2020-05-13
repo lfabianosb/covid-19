@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
 import { Spinner } from "react-bootstrap";
-import UFs from "../../shared/UFs";
 import style from "./style.module.css";
 
-const urlCasos =
-  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMapa?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
+const url =
+  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalEstado";
 
 function MortePorMilhao() {
   const [labels, setLabels] = useState(null);
@@ -14,14 +13,16 @@ function MortePorMilhao() {
   const chartContainer = useRef(null);
 
   useEffect(() => {
-    const getMortes = async () => {
+    const getData = async () => {
       try {
-        const response = await fetch(urlCasos);
+        const response = await fetch(url, {
+          referrer: "https://covid.saude.gov.br/",
+        });
         const data = await response.json();
-        setMortes(
-          data.results.map(({ nome, letalidade }) => ({
+        setData(
+          data.map(({ nome, incidenciaObito }) => ({
             nome,
-            letalidade: parseFloat(letalidade),
+            letalidade: parseFloat(incidenciaObito.replace(",", ".")),
           }))
         );
       } catch (error) {
@@ -29,21 +30,13 @@ function MortePorMilhao() {
       }
     };
 
-    getMortes();
+    getData();
   }, []);
 
   useEffect(() => {
-    if (mortes) {
-      mortes.forEach((morte) => {
-        UFs.forEach((estado) => {
-          if (estado.nome === morte.nome) {
-            morte.sigla = estado.sigla;
-          }
-        });
-      });
-
+    if (data) {
       // Sort desc
-      mortes.sort((a, b) => {
+      data.sort((a, b) => {
         if (a.letalidade < b.letalidade) {
           return 1;
         }
@@ -53,13 +46,15 @@ function MortePorMilhao() {
         return 0;
       });
 
-      setLabels(mortes.map(({ sigla }) => sigla));
-      setData(mortes.map(({ letalidade }) => letalidade));
+      console.log("data", data);
+
+      setLabels(data.map(({ nome }) => nome));
+      setMortes(data.map(({ letalidade }) => letalidade));
     }
-  }, [mortes]);
+  }, [data]);
 
   useEffect(() => {
-    if (chartContainer && chartContainer.current && labels && data) {
+    if (chartContainer && chartContainer.current && labels && mortes) {
       new Chartjs(chartContainer.current, {
         type: "horizontalBar",
         data: {
@@ -67,7 +62,7 @@ function MortePorMilhao() {
           datasets: [
             {
               label: "Mortes",
-              data: data,
+              data: mortes,
               backgroundColor: "rgba(235, 54, 54, 0.5)",
               borderWidth: 1,
             },
@@ -82,7 +77,7 @@ function MortePorMilhao() {
           responsive: true,
           title: {
             display: true,
-            text: "MORTES POR MILHÃO DE HABITANTES",
+            text: "MORTES POR CEM MIL HABITANTES",
           },
           scales: {
             xAxes: [
@@ -99,7 +94,7 @@ function MortePorMilhao() {
         },
       });
     }
-  }, [chartContainer, labels, data]);
+  }, [chartContainer, labels, mortes]);
 
   if (!data) {
     return (

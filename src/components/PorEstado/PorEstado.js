@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chartjs from "chart.js";
-import UFs from "../../shared/UFs";
 import style from "./style.module.css";
 
 const url =
-  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalMapa?X-Parse-Application-Id=unAFkcaNDeXajurGB7LChj8SgQYS2ptm";
+  "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalEstado";
 
 function PorEstado() {
   const [labels, setLabels] = useState(null);
@@ -16,13 +15,15 @@ function PorEstado() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          referrer: "https://covid.saude.gov.br/",
+        });
         const data = await response.json();
         setData(
-          data.results.map(({ nome, qtd_confirmado, qtd_obito }) => ({
+          data.map(({ nome, casosAcumulado, obitosAcumulado }) => ({
             estado: nome,
-            confirmado: qtd_confirmado,
-            obito: qtd_obito,
+            confirmado: casosAcumulado,
+            obito: obitosAcumulado,
           }))
         );
       } catch (error) {
@@ -34,14 +35,6 @@ function PorEstado() {
 
   useEffect(() => {
     if (data) {
-      data.forEach((item) => {
-        UFs.forEach((estado) => {
-          if (estado.nome === item.estado) {
-            item.sigla = estado.sigla;
-          }
-        });
-      });
-
       // Sort desc
       data.sort((a, b) => {
         if (a.confirmado < b.confirmado) {
@@ -53,7 +46,7 @@ function PorEstado() {
         return 0;
       });
 
-      setLabels(data.map(({ sigla }) => sigla));
+      setLabels(data.map(({ estado }) => estado));
       setCasos(data.map(({ confirmado }) => confirmado));
       setMortes(data.map(({ obito }) => obito));
     }
