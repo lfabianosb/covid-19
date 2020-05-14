@@ -15,9 +15,7 @@ function PorEstado() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url, {
-          referrer: "https://covid.saude.gov.br/",
-        });
+        const response = await fetch(url);
         const data = await response.json();
         setData(
           data.map(({ nome, casosAcumulado, obitosAcumulado }) => ({

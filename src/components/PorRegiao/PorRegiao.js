@@ -16,13 +16,11 @@ function PorRegiao() {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        setLabels(data.results.map((result) => result.nome));
+        setLabels(data.results.map(({ nome }) => nome));
         setData(
-          data.results.map((result) => {
-            if (result.percent) {
-              return result.percent
-                .replace(",", ".")
-                .substring(0, result.percent.length - 1);
+          data.results.map(({ percent }) => {
+            if (percent) {
+              return percent.replace(",", ".").substring(0, percent.length - 1);
             }
             return 0;
           })

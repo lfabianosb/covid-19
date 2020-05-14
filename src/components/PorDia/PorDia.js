@@ -15,9 +15,7 @@ function PorDia() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url, {
-          referrer: "https://covid.saude.gov.br/",
-        });
+        const response = await fetch(url);
         const data = await response.json();
         setLabels(data.dias.map(({ _id }) => _id));
         setCasos(data.dias.map(({ casosNovos }) => casosNovos));

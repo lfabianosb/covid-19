@@ -11,9 +11,7 @@ const Geral = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url, {
-          referrer: "https://covid.saude.gov.br/",
-        });
+        const response = await fetch(url);
         const data = await response.json();
         setGeral({
           confirmados: data.confirmados.total,
