@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Acumulado } from "../../components/Acumulado";
 import { Geral } from "../../components/Geral";
 import { PorRegiao } from "../../components/PorRegiao";
-import { NovosPorDia } from "../../components/NovosPorDia";
 import { PorEstado } from "../../components/PorEstado";
 import { PorDia } from "../../components/PorDia";
-import { MortePorMilhao } from "../../components/MortePorMilhao";
+import { Habitantes } from "../../components/Habitantes";
 
 const Body = () => {
   return (
@@ -21,9 +20,6 @@ const Body = () => {
         <Route path="/por-regiao">
           <PorRegiao />
         </Route>
-        <Route path="/novos-por-dia">
-          <NovosPorDia />
-        </Route>
         <Route path="/por-estado">
           <PorEstado />
         </Route>
@@ -31,7 +27,7 @@ const Body = () => {
           <PorDia />
         </Route>
         <Route path="/morte-habitantes">
-          <MortePorMilhao />
+          <Habitantes />
         </Route>
       </Switch>
     </Router>
