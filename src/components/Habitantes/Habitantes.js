@@ -6,7 +6,7 @@ import style from "./style.module.css";
 const url =
   "https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalEstado";
 
-function MortePorMilhao() {
+function Habitantes() {
   const [labels, setLabels] = useState(null);
   const [mortes, setMortes] = useState(null);
   const [data, setData] = useState(null);
@@ -15,9 +15,7 @@ function MortePorMilhao() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await fetch(url, {
-          referrer: "https://covid.saude.gov.br/",
-        });
+        const response = await fetch(url);
         const data = await response.json();
         setData(
           data.map(({ nome, incidenciaObito }) => ({
@@ -45,9 +43,6 @@ function MortePorMilhao() {
         }
         return 0;
       });
-
-      console.log("data", data);
-
       setLabels(data.map(({ nome }) => nome));
       setMortes(data.map(({ letalidade }) => letalidade));
     }
@@ -115,4 +110,4 @@ function MortePorMilhao() {
   );
 }
 
-export default MortePorMilhao;
+export default Habitantes;
