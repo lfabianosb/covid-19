@@ -14,9 +14,9 @@ const Geral = () => {
         const response = await fetch(url);
         const data = await response.json();
         setGeral({
-          confirmados: data.confirmados.total,
-          recuperados: data.confirmados.recuperados,
-          obitos: data.obitos.total,
+          confirmados: parseInt(data.confirmados.total).toLocaleString(),
+          recuperados: parseInt(data.confirmados.recuperados).toLocaleString(),
+          obitos: parseInt(data.obitos.total).toLocaleString(),
           letalidade: data.obitos.letalidade,
           dt_atualizacao: new Date(data.dt_updated).toLocaleString(),
         });
@@ -50,7 +50,7 @@ const Geral = () => {
         <div className={style.number}>{geral.obitos}</div> Óbitos
       </div>
       <div className={style.item}>
-        <div className={style.number}>{geral.letalidade}</div> Letalidade
+        <div className={style.number}>{geral.letalidade}%</div> Letalidade
       </div>
       <div className={style.atualizacao}>
         Atualizado em {geral.dt_atualizacao}
